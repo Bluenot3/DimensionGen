@@ -90,9 +90,13 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({
         <div className="space-y-3">
             <h3 className="font-semibold text-lg">3D Object</h3>
             <div className="grid grid-cols-3 gap-3">
-                <ShapeButton shapeName="Z" currentShape={shape} setShape={setShape} />
+                <ShapeButton shapeName="Z" currentShape={shape} setShape={setShape} label="Logo Z" />
+                <ShapeButton shapeName="BlockZ" currentShape={shape} setShape={setShape} label="Block Z" />
                 <ShapeButton shapeName="TorusKnot" currentShape={shape} setShape={setShape} label="Knot" />
                 <ShapeButton shapeName="Sphere" currentShape={shape} setShape={setShape} />
+                <ShapeButton shapeName="Cube" currentShape={shape} setShape={setShape} />
+                <ShapeButton shapeName="Pyramid" currentShape={shape} setShape={setShape} />
+                <ShapeButton shapeName="ZEN" currentShape={shape} setShape={setShape} />
             </div>
         </div>
 

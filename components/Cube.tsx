@@ -4,55 +4,22 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { Center } from '@react-three/drei';
 
-interface LetterZProps {
+interface CubeProps {
   code: string;
   animationSpeed: number;
 }
 
 const FONT_SIZE = 48;
-const CANVAS_WIDTH = 2048; // Increased for clarity
+const CANVAS_WIDTH = 2048;
 
-const LetterZ: React.FC<LetterZProps> = ({ code, animationSpeed }) => {
+const Cube: React.FC<CubeProps> = ({ code, animationSpeed }) => {
   const meshRef = useRef<THREE.Mesh>(null!);
   const materialRef = useRef<THREE.MeshPhysicalMaterial>(null!);
-  
-  const zShape = useMemo(() => {
-    const s = 10;
-    const shape = new THREE.Shape();
-
-    // A single, continuous shape outlining the logo
-    shape.moveTo(-s, 4.5);
-    shape.lineTo(-s, s);
-    shape.lineTo(s * 0.8, s);
-    shape.lineTo(s, s * 0.8);
-    shape.lineTo(s, 2.5);
-    shape.lineTo(s * 0.25, -4.5);
-    shape.lineTo(s * 0.8, -4.5);
-    shape.lineTo(s, -s * 0.65);
-    shape.lineTo(s, -s);
-    shape.lineTo(-s * 0.8, -s);
-    shape.lineTo(-s, -s * 0.8);
-    shape.lineTo(-s, -2.5);
-    shape.lineTo(-s * 0.25, 4.5);
-    shape.lineTo(-s, 4.5);
-
-    return shape;
-  }, []);
-
-  const extrudeSettings = useMemo(() => ({
-    steps: 2,
-    depth: 2.5,
-    bevelEnabled: true,
-    bevelThickness: 0.5,
-    bevelSize: 0.5,
-    bevelOffset: 0,
-    bevelSegments: 8,
-  }), []);
 
   const texture = useMemo(() => {
     const canvas = document.createElement('canvas');
     canvas.width = CANVAS_WIDTH;
-    canvas.height = 4096;
+    canvas.height = 2048;
     const texture = new THREE.CanvasTexture(canvas);
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
@@ -99,7 +66,7 @@ const LetterZ: React.FC<LetterZProps> = ({ code, animationSpeed }) => {
   return (
     <Center>
       <mesh ref={meshRef}>
-        <extrudeGeometry args={[zShape, extrudeSettings]} />
+        <boxGeometry args={[10, 10, 10]} />
         <meshPhysicalMaterial 
             ref={materialRef}
             map={texture}
@@ -120,4 +87,4 @@ const LetterZ: React.FC<LetterZProps> = ({ code, animationSpeed }) => {
   );
 };
 
-export default LetterZ;
+export default Cube;

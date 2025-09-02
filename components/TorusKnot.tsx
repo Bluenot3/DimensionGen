@@ -9,8 +9,8 @@ interface TorusKnotProps {
   animationSpeed: number;
 }
 
-const FONT_SIZE = 48;
-const CANVAS_WIDTH = 1024;
+const FONT_SIZE = 40;
+const CANVAS_WIDTH = 2048;
 
 const TorusKnot: React.FC<TorusKnotProps> = ({ code, animationSpeed }) => {
   const meshRef = useRef<THREE.Mesh>(null!);
@@ -19,7 +19,7 @@ const TorusKnot: React.FC<TorusKnotProps> = ({ code, animationSpeed }) => {
   const texture = useMemo(() => {
     const canvas = document.createElement('canvas');
     canvas.width = CANVAS_WIDTH;
-    canvas.height = 2048;
+    canvas.height = 4096;
     const texture = new THREE.CanvasTexture(canvas);
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
@@ -66,15 +66,15 @@ const TorusKnot: React.FC<TorusKnotProps> = ({ code, animationSpeed }) => {
   return (
     <Center>
       <mesh ref={meshRef}>
-        <torusKnotGeometry args={[5, 1.5, 200, 32]} />
+        <torusKnotGeometry args={[5, 1.5, 256, 32]} />
         <meshPhysicalMaterial 
             ref={materialRef}
             map={texture}
             transmission={0.95} 
             thickness={2.5}
-            roughness={0.1}
+            roughness={0.05}
             ior={1.5}
-            metalness={0.05}
+            metalness={0.1}
             emissive="#00f0c0"
             emissiveMap={texture}
             emissiveIntensity={0.25}

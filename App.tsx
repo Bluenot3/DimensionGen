@@ -6,7 +6,7 @@ import PromptBar from './components/PromptBar';
 import SettingsIcon from './components/icons/SettingsIcon';
 import * as geminiService from './services/geminiService';
 
-export type ShapeType = 'Z' | 'TorusKnot' | 'Sphere';
+export type ShapeType = 'Z' | 'BlockZ' | 'TorusKnot' | 'Sphere' | 'Cube' | 'Pyramid' | 'ZEN';
 
 const App: React.FC = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);

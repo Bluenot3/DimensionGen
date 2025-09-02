@@ -4,44 +4,39 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { Center } from '@react-three/drei';
 
-interface LetterZProps {
+interface BlockZProps {
   code: string;
   animationSpeed: number;
 }
 
 const FONT_SIZE = 48;
-const CANVAS_WIDTH = 2048; // Increased for clarity
+const CANVAS_WIDTH = 1024;
 
-const LetterZ: React.FC<LetterZProps> = ({ code, animationSpeed }) => {
+const BlockZ: React.FC<BlockZProps> = ({ code, animationSpeed }) => {
   const meshRef = useRef<THREE.Mesh>(null!);
   const materialRef = useRef<THREE.MeshPhysicalMaterial>(null!);
   
   const zShape = useMemo(() => {
-    const s = 10;
+    const s = 8;
     const shape = new THREE.Shape();
-
-    // A single, continuous shape outlining the logo
-    shape.moveTo(-s, 4.5);
-    shape.lineTo(-s, s);
-    shape.lineTo(s * 0.8, s);
-    shape.lineTo(s, s * 0.8);
-    shape.lineTo(s, 2.5);
-    shape.lineTo(s * 0.25, -4.5);
-    shape.lineTo(s * 0.8, -4.5);
-    shape.lineTo(s, -s * 0.65);
+    // A simple block Z shape
+    shape.moveTo(-s, s);
+    shape.lineTo(s, s);
+    shape.lineTo(s, s - 2.5);
+    shape.lineTo(-s + 2.5, -s + 2.5);
+    shape.lineTo(s, -s + 2.5);
     shape.lineTo(s, -s);
-    shape.lineTo(-s * 0.8, -s);
-    shape.lineTo(-s, -s * 0.8);
-    shape.lineTo(-s, -2.5);
-    shape.lineTo(-s * 0.25, 4.5);
-    shape.lineTo(-s, 4.5);
-
+    shape.lineTo(-s, -s);
+    shape.lineTo(-s, -s + 2.5);
+    shape.lineTo(s - 2.5, s - 2.5);
+    shape.lineTo(-s, s - 2.5);
+    shape.lineTo(-s, s);
     return shape;
   }, []);
 
   const extrudeSettings = useMemo(() => ({
     steps: 2,
-    depth: 2.5,
+    depth: 2,
     bevelEnabled: true,
     bevelThickness: 0.5,
     bevelSize: 0.5,
@@ -52,7 +47,7 @@ const LetterZ: React.FC<LetterZProps> = ({ code, animationSpeed }) => {
   const texture = useMemo(() => {
     const canvas = document.createElement('canvas');
     canvas.width = CANVAS_WIDTH;
-    canvas.height = 4096;
+    canvas.height = 2048;
     const texture = new THREE.CanvasTexture(canvas);
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
@@ -105,9 +100,9 @@ const LetterZ: React.FC<LetterZProps> = ({ code, animationSpeed }) => {
             map={texture}
             transmission={0.95} 
             thickness={2.5}
-            roughness={0.05}
+            roughness={0.1}
             ior={1.5}
-            metalness={0.1}
+            metalness={0.05}
             emissive="#00f0c0"
             emissiveMap={texture}
             emissiveIntensity={0.25}
@@ -120,4 +115,4 @@ const LetterZ: React.FC<LetterZProps> = ({ code, animationSpeed }) => {
   );
 };
 
-export default LetterZ;
+export default BlockZ;

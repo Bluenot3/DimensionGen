@@ -14,7 +14,7 @@ const App: React.FC = () => {
   const [currentCode, setCurrentCode] = useState<string>('// Welcome to Gemini 3D Code Visualizer...\n// Starting code generation...');
   const [isLoading, setIsLoading] = useState(false);
   
-  const [shape, setShape] = useState<ShapeType>('Z');
+  const [shape, setShape] = useState<ShapeType>('ZEN');
   const [animationSpeed, setAnimationSpeed] = useState(0.15);
   const [zoomEnabled, setZoomEnabled] = useState(true);
 

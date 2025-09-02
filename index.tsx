@@ -1,4 +1,7 @@
 
+// Fix: Add side-effect import to load react-three-fiber's JSX type definitions.
+// This resolves "Property '...' does not exist on type 'JSX.IntrinsicElements'" errors.
+import '@react-three/fiber';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';

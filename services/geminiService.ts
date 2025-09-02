@@ -1,13 +1,8 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-// Ensure the API key is available. In a real-world app, this would be handled more securely.
-if (!process.env.API_KEY) {
-    // A mock key is provided for environments where process.env is not configured.
-    // This allows the app to load without error, though API calls will fail.
-    process.env.API_KEY = "mock_api_key_for_testing"; 
-}
-
+// Fix: Removed the conditional block that sets a mock API_KEY.
+// The API key must be provided exclusively through the `process.env.API_KEY` environment variable as per guidelines.
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 const model = 'gemini-2.5-flash';
 
